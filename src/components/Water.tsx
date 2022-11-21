@@ -37,6 +37,27 @@ const Water: FunctionComponent = () => {
       min: 0,
       max: 10,
     },
+    smallWavesElevation: {
+      value: 0.15,
+      min: 0,
+      max: 1
+    },
+    smallWavesFrequency: {
+      value: 3,
+      min: 0,
+      max: 30,
+    },
+    smallWavesSpeed: {
+      value: 0.2,
+      min: 0,
+      max: 4,
+    },
+    smallWavesIterations: {
+      value: 4.0,
+      min: 0,
+      max: 5,
+      step: 1,
+    },
   });
 
   useFrame(({ clock }) => {
@@ -45,7 +66,7 @@ const Water: FunctionComponent = () => {
 
   return (
     <mesh rotation={new Euler(-Math.PI * 0.5)}>
-      <planeGeometry args={[2, 2, 128, 128]} />
+      <planeGeometry args={[2, 2, 512, 512]} />
       <shaderMaterial
         side={DoubleSide}
         key={Date.now()}
@@ -62,6 +83,10 @@ const Water: FunctionComponent = () => {
           uSurfaceColor: { value: new Color(controls.surfaceColor) },
           uColorOffset: { value: controls.colorOffset },
           uColorMultiplier: { value: controls.colorMultiplier },
+          uSmallWavesElevation: { value: controls.smallWavesElevation },
+          uSmallWavesFrequency: { value: controls.smallWavesFrequency },
+          uSmallWavesSpeed: { value: controls.smallWavesSpeed },
+          uSmallWavesIterations: { value: controls.smallWavesIterations },
         }}
       />
     </mesh>
