@@ -3,7 +3,7 @@ uniform float uBigWavesElevation;
 uniform vec2 uBigWavesFrequency;
 uniform float uBigWavesSpeed;
 
-varying vec2 vUv;
+varying float vElevation;
 
 void main()
 {
@@ -20,5 +20,5 @@ void main()
 
     gl_Position = projectionMatrix * viewPosition;
 
-    vUv = uv;
+    vElevation = elevation;
 }

@@ -1,4 +1,4 @@
-import { DoubleSide, Euler, ShaderMaterial } from "three";
+import { Color, DoubleSide, Euler, ShaderMaterial } from "three";
 import { FunctionComponent, useRef } from "react";
 import vertexShader from "../shaders/water/vertex.glsl";
 import fragmentShader from "../shaders/water/fragment.glsl";
@@ -12,7 +12,6 @@ const Water: FunctionComponent = () => {
       value: 0.2,
       min: 0,
       max: 1,
-      step: 0.001,
     },
     bigWavesFrequency: {
       value: [4, 1.5],
@@ -21,6 +20,22 @@ const Water: FunctionComponent = () => {
       value: 0.75,
       min: 0,
       max: 4,
+    },
+    depthColor: {
+      value: "#186691",
+    },
+    surfaceColor: {
+      value: "#9bd8ff",
+    },
+    colorOffset: {
+      value: 0.08,
+      min: 0,
+      max: 1,
+    },
+    colorMultiplier: {
+      value: 5,
+      min: 0,
+      max: 10,
     },
   });
 
@@ -33,7 +48,7 @@ const Water: FunctionComponent = () => {
       <planeGeometry args={[2, 2, 128, 128]} />
       <shaderMaterial
         side={DoubleSide}
-        key={controls.bigWavesElevation}
+        key={Date.now()}
         ref={shaderRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
@@ -43,6 +58,10 @@ const Water: FunctionComponent = () => {
           uBigWavesElevation: { value: controls.bigWavesElevation },
           uBigWavesFrequency: { value: controls.bigWavesFrequency },
           uBigWavesSpeed: { value: controls.bigWavesSpeed },
+          uDepthColor: { value: new Color(controls.depthColor) },
+          uSurfaceColor: { value: new Color(controls.surfaceColor) },
+          uColorOffset: { value: controls.colorOffset },
+          uColorMultiplier: { value: controls.colorMultiplier },
         }}
       />
     </mesh>
