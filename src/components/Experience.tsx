@@ -1,6 +1,6 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { FunctionComponent, ReactNode } from "react";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 
 interface ExperienceProps {
   children?: ReactNode;
@@ -8,8 +8,16 @@ interface ExperienceProps {
 
 const Experience: FunctionComponent<ExperienceProps> = ({ children }) => {
   return (
-    <Canvas>
-      <OrbitControls />
+    <Canvas dpr={Math.min(2, window.devicePixelRatio)}>
+      <color attach="background" args={["black"]} />
+      <OrbitControls enableDamping enablePan={false} />
+      <PerspectiveCamera
+        makeDefault
+        fov={75}
+        far={100}
+        near={0.1}
+        position={[1, 1, 1]}
+      />
       {children}
     </Canvas>
   );
